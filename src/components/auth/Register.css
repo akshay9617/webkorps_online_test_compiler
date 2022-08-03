@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+.bottomLine {
+  font-size: 16px;
+}
+
+.bottomLineTwo {
+  font-size: 16px;
+  margin-top: 1px;
+}
+
+.req_input {
+  color: #0057ff;
+  font-size: 15px;
+}
+
+.RequiredFields {
+  font-size: 13px;
+  margin-top: -2px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.overlay {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: rgba(3, 3, 3, 0.7);
+}
+
+.parent {
+  display: flex;
+  flex-direction: row;
+}
+
+.circle_button-one {
+  height: 25px;
+  width: 25px;
+  border: 1px solid rgba(2, 2, 2, 0.24);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.lining {
+  width: 25px;
+  border: .5px solid black;
+  margin-top: 14px;
+  height: 1px;
+}
+
+
+.img {
+  object-fit: cover;
+}
+
+
+
+.rounded_circle_png {
+  position: relative;
+  height: 22px;
+  margin-top: 3px;
+}
+
+.round_numberTwo {
+  position: absolute;
+  margin-left: 50px;
+  height: 10px;
+  margin-top: 5px;
+  color: #555;
+  font-size: 15px;
+}
+
+.CheckBox {
+  height: 18px;
+  width: 18px;
+  margin-top: 25px;
+  margin-right: 10px;
+}
