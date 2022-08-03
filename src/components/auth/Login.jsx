@@ -1,10 +1,14 @@
-import React from "react";
-import GroupLogo from "./images/Grouplogo.svg";
+import React, { useState } from "react";
+import { GroupLogo, bgrectangle } from "../../assests/images";
+// import GroupLogo from "./images/Grouplogo.svg";
 import styled from "styled-components";
-import bg from "./images/bgrectangle.png";
+// import bg from "./images/bgrectangle.png";
 import "./Register.css";
-
-
+import { useSelector, useDispatch } from 'react-redux'
+import { login, logout } from "../../reducers/authReducer";
+import { useNavigate } from 'react-router-dom';
+import {VscEye} from 'react-icons/vsc'
+import {VscEyeClosed} from 'react-icons/vsc'
 export const LoginCopyWrite = styled.p`
   color: white;
   text-align: center;
@@ -59,6 +63,7 @@ export const Input = styled.input`
   background-color: #c4c4c4;
   height: 48px;
   border-radius: 5px;
+
 `;
 
 export const MainHeading = styled.div`
@@ -79,16 +84,76 @@ export const MainInnerHeading = styled.p`
 `;
 
 const Div = styled.div`
-  background-image: url(${bg});
+  background-image: url(${bgrectangle});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   height: 100vh;
   width: 100%;
+  .showPassword{
+    position: absolute;
+    display: flex;
+    margin-left: 341px;
+    font-size: 20px;
+    margin-top: -31px;
+  }
   /* overflow: hidden; */
 `;
 
 const Login = () => {
+    const [showPassword, setShowPassword]=useState(false);
+    const [credentials, setCredentails]=useState({
+        email:"",
+        password:""
+    })
+    const [ errorMessage, setErrorMessage]=useState({
+        value:""
+    })
+    const navigate=useNavigate();
+    const [isAuthenticated, setIsAuthenticated]=useState(false)
+    const state=useSelector((state)=>state.authred.value)
+    const dispatch=useDispatch();
+    const handleOnChange=(e)=>{
+        setCredentails({
+            ...credentials,
+            [e.target.name]:e.target.value
+        })
+        }
+
+    const handleShow=()=>{
+        if(showPassword===false){
+            setShowPassword(true)
+        }
+        else{
+            setShowPassword(false)
+        }
+    }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (credentials.email === "" || credentials.password === "") {
+          setErrorMessage((prevState) => ({
+            value: "Empty email/password field",
+          }));
+          alert(errorMessage)
+    
+        } else if (
+          credentials.email.toLowerCase() === "admin" &&
+          credentials.password === "123456"
+        ) {
+          
+          dispatch(login());
+          navigate('/dashbord')
+        //   setIsAuthenticated(true);
+          
+        } else {
+          setErrorMessage({ value: "Invalid email/password" });
+          alert(JSON.stringify(errorMessage.value))
+          return;
+        }
+      };
+    
   return (
     <>
       <Div>
@@ -112,22 +177,31 @@ const Login = () => {
                       type="email"
                       className="form-control mt-2"
                       required={true}
+                      onChange={handleOnChange}
+                      value={credentials?.email}
+                      name="email"
                     />
                   </div>
                   <div className="form-group mt-4">
                     <InputLabel>Password</InputLabel>
                     <Input
-                      type="tel"
+                      type={showPassword?"text":"password"}
                       className="form-control mt-2"
                       required={true}
-                    />
+                      onChange={handleOnChange}
+                      value={credentials?.password}
+                      name="password"
+                     
+                    />{showPassword?<VscEye className="showPassword" onClick={()=>handleShow()}/>:
+                        
+                        <VscEyeClosed className="showPassword" onClick={()=>handleShow()}/>}
                   </div>
                   <SaveDetail>
                     <input type="checkbox" className="CheckBox" />
                     <p className="mt-4 mb-3">Remember me</p>
                   </SaveDetail>
                   <div className="d-flex justify-content-center">
-                    <SubmitButton type="submit">Log in</SubmitButton>
+                    <SubmitButton type="submit" onClick={handleSubmit}>Log in</SubmitButton>
                   </div>
                 </form>
                 <p className="text-center text-secondary mt-4 bottomLine">
