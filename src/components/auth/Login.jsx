@@ -1,7 +1,7 @@
 import React from "react";
-import GroupLogo from "../../assests/images/Grouplogo.svg";
+import GroupLogo from "./images/Grouplogo.svg";
 import styled from "styled-components";
-import bg from "../../assests/images/bgrectangle.png";
+import bg from "./images/bgrectangle.png";
 import "./Register.css";
 
 
