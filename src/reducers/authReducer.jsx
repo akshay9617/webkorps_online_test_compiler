@@ -10,17 +10,19 @@ export const authReducer = createSlice({
   reducers: {
     login: (state) => {
       state.value=true
+      localStorage.setItem("isAuth",state)
     },
     logout: (state) => {
       state.value =false
+      localStorage.setItem("isAuth",state)
     },
-    incrementByAmount: (state, action) => {
-      state.value = action.payload
-    },
+    // incrementByAmount: (state, action) => {
+    //   state.value = action.payload
+    // },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, incrementByAmount } = authReducer.actions
+export const { login, logout } = authReducer.actions
 
 export default authReducer.reducer
